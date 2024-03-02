@@ -18,11 +18,11 @@ public class MainFrame extends JFrame {
         int screenHeight = d.height;
         int screenWidth = d.width;
         
-        frameWidth = 1000;
-        frameHeight =  500;
+        frameWidth = 800;
+        frameHeight =  450;
         setSize(frameWidth,frameHeight);
-        setLocation(screenWidth/2 - (screenWidth/2)/2 -50, screenHeight/2  - (screenHeight/2)/2 -20);
-        view = new ArrayView(_sortArray);
+        setLocation(screenWidth/2 - frameWidth/2, screenHeight/2 - frameHeight/2);
+        view = new ArrayView(_sortArray,this);
 
         Container container = this.getContentPane();
         container.add(view);

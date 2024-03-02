@@ -3,33 +3,34 @@ import java.awt.*;
 
 public class ArrayView extends JPanel {
     SortArray sortArray;
-    JComponent viewComponent;
     int viewHeight;
     int viewWidht;
-    double spaceHeight;
-    double spaceWidth;
+    int spaceHeight;
+    int spaceWidth;
 
-    public ArrayView(SortArray sortArray){
-        viewComponent = new JPanel();
-        add(viewComponent);
+    public ArrayView(SortArray sortArray,MainFrame mainFrame){
         this.sortArray = sortArray;
 
-        viewHeight = 500;
-        viewWidht = 1000;
-        this.setSize(viewWidht,viewHeight);
-
-        spaceHeight = ((double) viewHeight /(double) sortArray.startNum);
-        System.out.println("sh = " + spaceHeight);
-        spaceWidth = ((double)viewWidht/(double) sortArray.startNum);
-        System.out.println("sw = " + spaceWidth);
+        viewHeight = mainFrame.frameHeight;
+        viewWidht = mainFrame.frameWidth;
+        spaceHeight = (viewHeight /sortArray.startNum);
+        spaceWidth = (viewWidht/sortArray.startNum);
+        mainFrame.setSize(mainFrame.frameWidth,mainFrame.frameHeight+28);
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.setColor(Color.red);
-        g.drawRect(0,0,1000,500);
+        paintView(g);
+    }
+
+    public void paintView(Graphics g) {
+        repaint();
         g.setColor(Color.black);
         for(int i = 0; i < sortArray.startNum; i++){
-            g.fillRect((int) (spaceWidth*i), (int) ((viewHeight) -((spaceHeight)*sortArray.intArr[i])), (int) spaceWidth, (int) (spaceHeight*sortArray.intArr[i]));
+            g.fillRect((spaceWidth*i),
+                    ((viewHeight) -(spaceHeight)*sortArray.intArr[i]),
+                    spaceWidth ,
+                    (int) (spaceHeight*sortArray.intArr[i]));
         }
+        repaint();
     }
 }
